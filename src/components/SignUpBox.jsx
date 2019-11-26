@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 // Should Import Links
 // Import CSS Page
 
-class LoginBox extends Component {
+class SignUpBox extends Component {
   constructor(props){
     super(props);
     this.state = {
       usermail: '',
-      passcode: '',
-      passcodeCheck: '',
+      passcode: ''
     }
   }
 
@@ -22,16 +21,13 @@ class LoginBox extends Component {
    // e.preventDefault();
     // Does call to Login Route
     // And return result
-    if(this.state.passcode === this.state.passcodeCheck)
-      alert(`Email: ${this.state.usermail}\nPass: ${this.state.passcode}`);
-    else
-      alert(`Passcode does not match`)
+    alert(`Email: ${this.state.usermail}\nPass: ${this.state.passcode}`);
   }
   render(){
     return (
       <div>
         <form>
-          <h1>Login Page</h1>
+          <h1>Sign Up Page</h1>
           <input
             type="email"
             name="usermail"
@@ -48,26 +44,18 @@ class LoginBox extends Component {
             required
           />
           <br/>
-          <input
-            type="password"
-            name="passcodeCheck"
-            onChange={this.handleChange}
-            placeholder="Reenter Password"
-            required
-          />
-          <br/>
 
           <input
             type="submit"
-            value="Login"
+            value="Create Account"
             onClick={this.handleSubmit}
           />
         </form>
-        <button onClick={() => {this.props.setPage('SignUp')}}>Create Account</button>
+        <button onClick={() => {this.props.setPage('Login')}}>Login</button>
       </div>
 
     )
   }
 }
 
-export default LoginBox;
+export default SignUpBox;
