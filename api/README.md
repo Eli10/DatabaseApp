@@ -8,6 +8,15 @@ Steps to Run (For Mac)
 - Start api `python3 app.py`
 
 
+## Api Routes
+
+Users
+- /users Able to get all users
+- /user/email/<email> - Get a user by email
+- /sign-up - Sign up a new user
+- /sign-in - Login as a user
+
+
 ## To-Do
 - Dockerize Api
 - Add Database Models once we get schemas
