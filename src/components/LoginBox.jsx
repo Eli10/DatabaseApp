@@ -8,7 +8,6 @@ class LoginBox extends Component {
     this.state = {
       usermail: '',
       passcode: '',
-      passcodeCheck: '',
     }
   }
 
@@ -22,10 +21,11 @@ class LoginBox extends Component {
    // e.preventDefault();
     // Does call to Login Route
     // And return result
-    if(this.state.passcode === this.state.passcodeCheck)
-      alert(`Email: ${this.state.usermail}\nPass: ${this.state.passcode}`);
-    else
-      alert(`Passcode does not match`)
+    // if(this.state.passcode === this.state.passcodeCheck)
+    //   alert(`Email: ${this.state.usermail}\nPass: ${this.state.passcode}`);
+    // else
+    //   alert(`Passcode does not match`)
+    alert(`Email: ${this.state.usermail}\nPass: ${this.state.passcode}`);
   }
   render(){
     return (
@@ -45,14 +45,6 @@ class LoginBox extends Component {
             name="passcode"
             onChange={this.handleChange}
             placeholder="Password"
-            required
-          />
-          <br/>
-          <input
-            type="password"
-            name="passcodeCheck"
-            onChange={this.handleChange}
-            placeholder="Reenter Password"
             required
           />
           <br/>
