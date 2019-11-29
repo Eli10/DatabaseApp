@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 // Import CSS Page
 
 class LoginBox extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       usermail: '',
-      passcode: ''
+      passcode: '',
     }
   }
 
@@ -21,12 +21,17 @@ class LoginBox extends Component {
    // e.preventDefault();
     // Does call to Login Route
     // And return result
+    // if(this.state.passcode === this.state.passcodeCheck)
+    //   alert(`Email: ${this.state.usermail}\nPass: ${this.state.passcode}`);
+    // else
+    //   alert(`Passcode does not match`)
     alert(`Email: ${this.state.usermail}\nPass: ${this.state.passcode}`);
   }
   render(){
     return (
       <div>
         <form>
+          <h1>Login Page</h1>
           <input
             type="email"
             name="usermail"
@@ -50,7 +55,7 @@ class LoginBox extends Component {
             onClick={this.handleSubmit}
           />
         </form>
-        <button>Create Account</button>
+        <button onClick={() => {this.props.setPage('SignUp')}}>Create Account</button>
       </div>
 
     )
