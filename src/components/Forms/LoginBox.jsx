@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
 // Should Import Links
 // Import CSS Page
 
@@ -17,6 +18,9 @@ class LoginBox extends Component {
     });
   }
 
+  test = () => {
+    return <Redirect to="/signup"/>
+  }
   handleSubmit = e => {
    // e.preventDefault();
     // Does call to Login Route
@@ -55,7 +59,7 @@ class LoginBox extends Component {
             onClick={this.handleSubmit}
           />
         </form>
-        <button onClick={() => {this.props.setPage('SignUp')}}>Create Account</button>
+        <button onClick={this.test}>Create Account</button>
       </div>
 
     )
