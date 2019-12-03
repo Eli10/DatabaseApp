@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
+const axios = require('axios');
+
+require('dotenv').config();
+
 // Should Import Links
 // Import CSS Page
+let instance;
+if(process.env.NODE_ENV === "development") {
+  instance = axios.create({
+    baseURL: 'http://localhost:5000',
+    headers: {'Content-Type': 'application/json'}
+  });
+}
 
 class SignUpBox extends Component {
   constructor(props){
@@ -25,11 +36,29 @@ class SignUpBox extends Component {
   }
 
   handleSubmit = e => {
-   // e.preventDefault();
     // Does call to Login Route
     // And return result
-    alert(`Email: ${this.state.usermail}\nPass: ${this.state.passcode}\nFname: ${this.state.firstname}`);
+
+    let body = JSON.stringify({
+      first_name: this.state.firstname,
+      last_name: this.state.lastname,
+      email: this.state.usermail,
+      password: this.state.passcode,
+      address: this.state.address,
+      city: this.state.city,
+      state: this.state.state,
+      zipcode: Number(this.state.zipcode),
+    });
+
+    instance.post('/sign-up',body)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
+
   render(){
     return (
       <div>
