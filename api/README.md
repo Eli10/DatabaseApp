@@ -21,6 +21,11 @@ Restaurants
 - POST /create_restaurant
 
 
+Menu Items
+- GET /<restaurant_id>/menu_items
+- POST /add_item
+
+
 ## To-Do
 - Dockerize Api
 - Add Database Models once we get schemas
