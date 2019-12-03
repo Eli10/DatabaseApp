@@ -11,10 +11,14 @@ Steps to Run (For Mac)
 ## Api Routes
 
 Users
-- /users Able to get all users
-- /user/email/<email> - Get a user by email
-- /sign-up - Sign up a new user
-- /sign-in - Login as a user
+- GET /users Able to get all users
+- GET /user/email/<email> - Get a user by email
+- POST /sign-up - Sign up a new user
+- GET /sign-in - Login as a user
+
+Restaurants
+- GET /restaurants
+- POST /create_restaurant
 
 
 ## To-Do

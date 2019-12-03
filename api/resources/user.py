@@ -41,7 +41,7 @@ class SignUp(Resource):
 
     def post(self):
         req_data = request.get_json()
-        # Validatind post body arguments then insert into table if valid else throw error
+        # Validating post body arguments then insert into table if valid else throw error
         try:
             result = UserAndAddressSchema().load(req_data)
             print(result)
