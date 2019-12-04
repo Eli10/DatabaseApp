@@ -4,6 +4,8 @@ from resources.user import UserByEmail, UsersAll, SignUp, SignIn
 from resources.restaurant import Restaurants, CreateRestaurant
 from resources.menu_items import GetMenuItems, AddMenuItem
 
+#Testing Azure
+
 app = Flask(__name__)
 api = Api(app)
 
