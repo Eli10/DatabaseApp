@@ -26,3 +26,4 @@ yarn-error.log*
 # Env files
 /api/resources/.env
 /api/resources/__pycache__
+/api/.git

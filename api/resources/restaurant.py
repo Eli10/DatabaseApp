@@ -2,6 +2,7 @@ from flask import request
 from flask_restful import Resource
 from marshmallow import Schema, fields, ValidationError
 import mysql.connector
+from mysql.connector import Error
 from dotenv import load_dotenv
 from .user import connection
 import os
@@ -12,11 +13,16 @@ load_dotenv()
 
 class Restaurants(Resource):
     def get(self):
+        print('HELLO TEST')
         try:
             get_restaurants_query = "SELECT restaurant_id, name, cuisine_type, sanitary_grade, rating from restaurants"
+            print('HELLO TEST 1')
             cn = connection()
+            print('HELLO TEST 1')
             cur = cn.cursor()
+            print('HELLO TEST 2')
             cur.execute(get_restaurants_query)
+            print('HELLO TEST 3')
 
             restaurants = {
                 "restaurants": []
@@ -33,8 +39,9 @@ class Restaurants(Resource):
                 }
                 restaurants["restaurants"].append(restaurant)
             return restaurants, 200
-        except:
-            return {"Msg": "Some error occurred"}, 500
+        except Error as e:
+            print(e)
+            return {"Msg": "Something wen wrong"},500
 
 
 class RestaurantSchema(Schema):

@@ -2,6 +2,7 @@ from flask import request
 from flask_restful import Resource
 from marshmallow import Schema, fields, ValidationError
 import mysql.connector
+from mysql.connector import Error
 from dotenv import load_dotenv
 import os
 
@@ -16,11 +17,11 @@ def connection():
     database = os.getenv('MYSQL_DATABASE')
 
     try:
-        c = mysql.connector.connect(user=user, database=database, password=pwd, host=host)
+        c = mysql.connector.connect(user=user, database=database, password=pwd, host=host, ssl_disabled=True)
         return c
-    except:
+    except Error as e:
+        print(e)
         print("Connection Error")
-        exit(1)
 
 
 class UserSignInSchema(Schema):
