@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
+const axios = require('axios');
+
+require('dotenv').config();
 // Should Import Links
 // Import CSS Page
+
+let instance;
+if(process.env.NODE_ENV === "development") {
+  instance = axios.create({
+    baseURL: 'http://localhost:5000',
+    headers: {'Content-Type': 'application/json'}
+  });
+}
 
 class LoginBox extends Component {
   constructor(props){
@@ -22,14 +33,25 @@ class LoginBox extends Component {
     return <Redirect to="/signup"/>
   }
   handleSubmit = e => {
-   // e.preventDefault();
+   e.preventDefault();
     // Does call to Login Route
     // And return result
     // if(this.state.passcode === this.state.passcodeCheck)
     //   alert(`Email: ${this.state.usermail}\nPass: ${this.state.passcode}`);
     // else
     //   alert(`Passcode does not match`)
-    alert(`Email: ${this.state.usermail}\nPass: ${this.state.passcode}`);
+    let body = JSON.stringify({
+      email: this.state.usermail,
+      password: this.state.passcode,
+    })
+
+    instance.post('/sign-in',body)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
   render(){
     return (
