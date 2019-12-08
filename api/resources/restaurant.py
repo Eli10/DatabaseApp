@@ -15,7 +15,7 @@ class Restaurants(Resource):
     def get(self):
         print('HELLO TEST')
         try:
-            get_restaurants_query = "SELECT restaurant_id, name, cuisine_type, sanitary_grade, rating from restaurants"
+            get_restaurants_query = "SELECT r.restaurant_id, r.name, r.cuisine_type, r.sanitary_grade, r.rating, a.street_adr, a.cityaddr, a.state, a.zipcode, a.latitude, a.longitude from restaurants r JOIN restaurant_address a ON r.restaurant_id = a.restaurant_id"
             print('HELLO TEST 1')
             cn = connection()
             print('HELLO TEST 1')
@@ -29,13 +29,19 @@ class Restaurants(Resource):
 
             }
 
-            for (restaurant_id, name, cuisine_type, sanitary_grade, rating) in cur:
+            for (restaurant_id, name, cuisine_type, sanitary_grade, rating, street_adr, cityaddr, state, zipcode, latitude, longitude) in cur:
                 restaurant = {
                     "restaurant_id": restaurant_id,
                     "name": name,
                     "cuisine_type": cuisine_type,
                     "sanitary_grade": sanitary_grade,
-                    "rating": rating
+                    "rating": rating,
+                    "street": street_adr,
+                    "city": cityaddr,
+                    "state": state,
+                    "zipcode": zipcode,
+                    "latitude": float(latitude),
+                    "longitude": float(longitude)
                 }
                 restaurants["restaurants"].append(restaurant)
             return restaurants, 200
