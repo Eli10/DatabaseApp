@@ -33,9 +33,9 @@ class LoginBox extends Component {
   }
   render(){
     return (
-      <div>
+      <div className="form">
         <form>
-          <h1>Login Page</h1>
+          <h1>Sign In</h1>
           <input
             type="email"
             name="usermail"
