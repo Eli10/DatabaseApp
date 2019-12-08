@@ -5,7 +5,10 @@ import Test from '../map/Map';
 class MapPage extends Component {
   render() {
     return (
-      <Test/>
+      <div className="page">
+
+        <Test/>
+      </div>
     )
   }
 }

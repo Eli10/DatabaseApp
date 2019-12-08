@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
+import NavigationBar from './components/static/NavigationBar';
 
 import * as pages from './components';
 
@@ -8,6 +9,7 @@ class App extends React.Component {
   render(){
     return (
       <Router>
+          <NavigationBar/>
         <div className="App-header">
           <Switch>
             <Route exact path="/" component={pages.HomePage} />

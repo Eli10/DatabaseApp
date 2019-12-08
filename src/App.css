@@ -5,7 +5,9 @@
 .App-logo {
   height: 40vmin;
 }
-
+.page{
+  margin: 4em 0em;
+}
 .App-header {
   background-color: #FF482B;
   min-height: 100vh;
