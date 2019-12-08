@@ -1,26 +1,39 @@
 import React, {Component} from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import {Link} from 'react-router-dom';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import {GetAllRestaurants} from '../../actions/apicalls';
 
 const stamenTonerTiles = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const stamenTonerAttr = '&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors';
-const mapCenter = [39.9528, -75.1638];
-const zoomLevel = 12;
+const mapCenter = [40.7128, -73.9000];
+const zoomLevel = 11;
+
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+});
 
 class Test extends Component {
   constructor(){
     super();
     this.state = {
-      locations: [
-        { longitude: 12.234,
-          latitude: 13.423
-        }
-      ],
-      restaurants: []
+      restaurants: {
+        restaurants: []
+      }
     }
   }
-  componentDidMount(){
+  async componentDidMount(){
     // Does API Request
-
+    let restaurants = await GetAllRestaurants();
+    this.setState({
+      restaurants: restaurants || {restaurants: []}
+    });
+    console.log(this.state.restaurants);
   }
 
   render(){
@@ -34,11 +47,17 @@ class Test extends Component {
           attribution={stamenTonerAttr}
           url={stamenTonerTiles}
         />
-        { this.state.locations.map( location => (
-            <Marker position = {[location.latitude, location.longitude]}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
+        { this.state.restaurants.restaurants.map( (location,index) => (
+            <Marker position = {[location.latitude, location.longitude]} key={index}>
+
+            <Popup>
+            {location.name} 
+            <br/> 
+            {location.rating} Stars
+            <br/>
+            <Link to={`/restaurant/${location.restaurant_id}`}> More info </Link>
+            </Popup>
+
             </Marker>
           ))
         }
