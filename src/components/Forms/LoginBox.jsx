@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
 const axios = require('axios');
 
 require('dotenv').config();
@@ -28,6 +29,9 @@ class LoginBox extends Component {
     });
   }
 
+  test = () => {
+    return <Redirect to="/signup"/>
+  }
   handleSubmit = e => {
    e.preventDefault();
     // Does call to Login Route
@@ -51,9 +55,9 @@ class LoginBox extends Component {
   }
   render(){
     return (
-      <div>
+      <div className="form">
         <form>
-          <h1>Login Page</h1>
+          <h1>Sign In</h1>
           <input
             type="email"
             name="usermail"
@@ -77,7 +81,7 @@ class LoginBox extends Component {
             onClick={this.handleSubmit}
           />
         </form>
-        <button onClick={() => {this.props.setPage('SignUp')}}>Create Account</button>
+        <button onClick={this.test}>Create Account</button>
       </div>
 
     )
