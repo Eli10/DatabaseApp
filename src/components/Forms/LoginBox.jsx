@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {Redirect, Link} from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
+import {Button} from 'react-bootstrap';
+import {withRouter, Link} from 'react-router-dom';
 const axios = require('axios');
 
 // Should Import Links
@@ -26,9 +28,6 @@ class LoginBox extends Component {
     });
   }
 
-  test = () => {
-    return <Redirect to="/signup"/>
-  }
   handleSubmit = e => {
    e.preventDefault();
     // Does call to Login Route
@@ -42,9 +41,12 @@ class LoginBox extends Component {
       password: this.state.passcode,
     })
 
+    let props = this.props;
+    
     instance.post('/sign-in',body)
     .then(function (response) {
       console.log(response);
+      props.history.push('/map');
     })
     .catch(function (error) {
       console.log(error);
@@ -52,37 +54,37 @@ class LoginBox extends Component {
   }
   render(){
     return (
-      <div className="form">
-        <form>
-          <h1>Sign In</h1>
-          <input
+      <Form onSubmit={this.handleSubmit} className='form-two'>
+        <h2>Sign in to Account</h2>
+        <Form.Group>
+          <Form.Label>Username</Form.Label>
+          <Form.Control 
+            onChange={this.handleChange}
+            required
             type="email"
             name="usermail"
-            onChange={this.handleChange}
-            placeholder="Email"
-            required
+            placeholder="name@example.com"
           />
-          <br/>
-          <input
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            onChange={this.handleChange}
+            required
             type="password"
             name="passcode"
-            onChange={this.handleChange}
-            placeholder="Password"
-            required
           />
-          <br/>
-
-          <input
-            type="submit"
-            value="Login"
-            onClick={this.handleSubmit}
-          />
-        </form>
-        <button onClick={this.test}><Link to="/signup">Create Account</Link></button>
-      </div>
+        </Form.Group>
+        <Button variant="success" size='lg' block type="submit">
+          Login
+        </Button>
+        <h6>
+          Don't have an account? <Link to='signup'>Click here!</Link>
+        </h6>
+      </Form>
 
     )
   }
 }
 
-export default LoginBox;
+export default withRouter(LoginBox);

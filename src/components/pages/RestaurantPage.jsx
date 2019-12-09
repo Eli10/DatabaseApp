@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import FoodMenu from '../tables/FoodMenu';
+import RestaurantInfo from '../tables/RestaurantInfo';
 import {Container, Row, Col} from 'react-bootstrap';
 
 class RestaurantPage extends Component {
@@ -7,12 +8,11 @@ class RestaurantPage extends Component {
     return(
       <Container className="page">
         <Row>
+          <RestaurantInfo/>
         <Col>
-        {/* Must Include General Restaurant Information */}
-        </Col>
-        <Col>
+          <h2>Pizza Menu</h2>
           <FoodMenu/>
-          </Col>
+        </Col>
 
         </Row>
       </Container>
