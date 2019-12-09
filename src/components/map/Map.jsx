@@ -33,7 +33,6 @@ class Test extends Component {
     this.setState({
       restaurants: restaurants || {restaurants: []}
     });
-    console.log(this.state.restaurants);
   }
 
   render(){

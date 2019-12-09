@@ -15,7 +15,10 @@ class App extends React.Component {
             <Route exact path="/" component={pages.HomePage} />
             <Route exact path="/signup" component={pages.SignUpPage}/>
             <Route exact path="/login" component={pages.LoginPage}/>
+
             <Route exact path="/map" component={pages.MapPage}/>
+            <Route exact path="/all-restaurants" component={pages.RestaurantsPage}/>
+
             <Route exact path="/restaurant/:id" component={pages.RestaurantPage}/>
 
             {/* To Do Forms */}
