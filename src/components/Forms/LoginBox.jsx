@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 const axios = require('axios');
 
 // Should Import Links
 // Import CSS Page
 
-let instance;
-if(process.env.NODE_ENV === "development") {
-  instance = axios.create({
-    baseURL: 'http://localhost:5000',
+let instance = axios.create({
+    baseURL: process.env.REACT_APP_API_BASEURL || 'https://cybertron-api.azurewebsites.net',
     headers: {'Content-Type': 'application/json'}
   });
-}
+
 
 class LoginBox extends Component {
   constructor(props){
@@ -80,7 +78,7 @@ class LoginBox extends Component {
             onClick={this.handleSubmit}
           />
         </form>
-        <button onClick={this.test}>Create Account</button>
+        <button onClick={this.test}><Link to="/signup">Create Account</Link></button>
       </div>
 
     )

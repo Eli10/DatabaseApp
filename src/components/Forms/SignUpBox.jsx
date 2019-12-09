@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 const axios = require('axios');
 
 
 // Should Import Links
 // Import CSS Page
-let instance;
-if(process.env.NODE_ENV === "development") {
-  instance = axios.create({
-    baseURL: 'http://localhost:5000',
-    headers: {'Content-Type': 'application/json'}
-  });
-}
+let instance = axios.create({
+  baseURL: process.env.REACT_APP_API_BASEURL || 'https://cybertron-api.azurewebsites.net',
+  headers: {'Content-Type': 'application/json'}
+});
 
 class SignUpBox extends Component {
   constructor(props){
@@ -35,9 +33,9 @@ class SignUpBox extends Component {
   }
 
   handleSubmit = e => {
+    e.preventDefault();
     // Does call to Login Route
     // And return result
-
     let body = JSON.stringify({
       first_name: this.state.firstname,
       last_name: this.state.lastname,
@@ -48,7 +46,6 @@ class SignUpBox extends Component {
       state: this.state.state,
       zipcode: Number(this.state.zipcode),
     });
-
     instance.post('/sign-up',body)
     .then(function (response) {
       console.log(response);
@@ -134,7 +131,7 @@ class SignUpBox extends Component {
             onClick={this.handleSubmit}
           />
         </form>
-        <button onClick={() => {this.props.setPage('Login')}}>Login</button>
+        <button><Link to="/">Login</Link></button>
       </div>
 
     )

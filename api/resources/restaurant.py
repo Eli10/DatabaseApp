@@ -49,6 +49,37 @@ class Restaurants(Resource):
             print(e)
             return {"Msg": "Something wen wrong"},500
 
+class GetRestaurant(Resource):
+    def get(self, restaurant_id):
+        try:
+            get_restaurant_query = "SELECT r.restaurant_id, r.name, r.cuisine_type, r.sanitary_grade, r.rating, a.street_adr, a.cityaddr, a.state, a.zipcode, a.latitude, a.longitude from restaurants r JOIN restaurant_address a ON r.restaurant_id = a.restaurant_id WHERE r.restaurant_id={}".format(restaurant_id)
+            print('HELLO TEST 1')
+            cn = connection()
+            print('HELLO TEST 1')
+            cur = cn.cursor()
+            print('HELLO TEST 2')
+            cur.execute(get_restaurant_query)
+            print('HELLO TEST 3')
+
+            for (restaurant_id, name, cuisine_type, sanitary_grade, rating, street_adr, cityaddr, state, zipcode, latitude, longitude) in cur:
+                restaurant = {
+                    "restaurant_id": restaurant_id,
+                    "name": name,
+                    "cuisine_type": cuisine_type,
+                    "sanitary_grade": sanitary_grade,
+                    "rating": rating,
+                    "street": street_adr,
+                    "city": cityaddr,
+                    "state": state,
+                    "zipcode": zipcode,
+                    "latitude": float(latitude),
+                    "longitude": float(longitude)
+                }
+                return restaurant, 200
+        except Error as e:
+            print(e)
+            return {"Msg": "Something went wrong"},500
+
 
 class RestaurantSchema(Schema):
     name = fields.Str()

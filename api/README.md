@@ -18,6 +18,7 @@ Users
 
 Restaurants
 - GET /restaurants
+- GET /restaurant/<restaurant_id>
 - POST /create_restaurant
 
 
