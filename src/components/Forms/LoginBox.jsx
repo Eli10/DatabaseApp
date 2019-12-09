@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
 const axios = require('axios');
 
-require('dotenv').config();
 // Should Import Links
 // Import CSS Page
 

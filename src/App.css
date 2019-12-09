@@ -33,6 +33,12 @@
   box-shadow: 1em;
 }
 
+.form-two {
+  border: #111 1px solid;
+  background-color: #eee;
+  padding: 2em;
+  color: #000;
+}
 .form h1{
   margin-top: 0;
 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 const axios = require('axios');
 
-require('dotenv').config();
 
 // Should Import Links
 // Import CSS Page
