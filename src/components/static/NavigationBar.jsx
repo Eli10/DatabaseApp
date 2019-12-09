@@ -9,7 +9,14 @@ class NavigationBar extends Component {
       <Navbar bg='light' expand='lg' fixed='top'>
         <Navbar.Brand href="/">Pizza Near Ya!</Navbar.Brand>
         <Nav className='mr-auto'>
-          <Nav.Link href="/map">Map</Nav.Link>
+          <Nav.Link href="/map">View Map</Nav.Link>
+          <Nav.Link href="/all-restaurants">All Restaurants</Nav.Link>
+        </Nav>
+
+        <Nav>
+          <Nav.Link href="/login">login</Nav.Link>
+          <Nav.Link href="/signup">Create Account</Nav.Link>
+
         </Nav>
 
       </Navbar>
