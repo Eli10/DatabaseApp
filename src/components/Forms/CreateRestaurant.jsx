@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Form from 'react-bootstrap/Form';
 import {Col, Button} from 'react-bootstrap';
 import {GetCoords, SetRestaurant} from '../../actions/apicalls';
-import {Redirect} from 'react-router-dom';
 
 class CreateRestaurant extends Component {
   constructor(){

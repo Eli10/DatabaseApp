@@ -12,6 +12,17 @@ export const GetAllRestaurants = () => {
   });
 }
 
+export const GetRestaurant = (id) => {
+  return axios
+  .get(`https://cybertron-api.azurewebsites.net/restaurant/${id}`)
+  .then(res => res.data)
+  .catch(err => {
+    console.log(err);
+    return []
+  })
+}
+
+
 export const GetRestaurantFood = (id) => {
   return axios
   .get(`https://cybertron-api.azurewebsites.net/${id}/menu_items`)

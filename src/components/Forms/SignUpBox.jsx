@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
+import {Button, Col} from 'react-bootstrap';
+import {withRouter} from 'react-router-dom';
 const axios = require('axios');
 
 
@@ -33,6 +35,7 @@ class SignUpBox extends Component {
   }
 
   handleSubmit = e => {
+    console.log("h");
     e.preventDefault();
     // Does call to Login Route
     // And return result
@@ -46,9 +49,12 @@ class SignUpBox extends Component {
       state: this.state.state,
       zipcode: Number(this.state.zipcode),
     });
+
+    let props = this.props; 
     instance.post('/sign-up',body)
-    .then(function (response) {
+    .then( (response) => {
       console.log(response);
+      props.history.push('/sign-in');
     })
     .catch(function (error) {
       console.log(error);
@@ -57,85 +63,103 @@ class SignUpBox extends Component {
 
   render(){
     return (
-      <div>
-        <form>
-          <h1>Sign Up Page</h1>
-          <input
-            type="name"
-            name="firstname"
+      <Form onSubmit={this.handleSubmit} className='form-two'>
+        <h2>Account Registration</h2>
+        <Form.Group>
+          <Form.Row>
+            <Col>
+              <Form.Label>First Name</Form.Label>
+              <Form.Control 
+                onChange={this.handleChange}
+                required
+                type="text"
+                name="firstname"
+                placeholder="First Name"
+              />
+            </Col>
+            <Col>
+              <Form.Label>Last Name</Form.Label>
+              <Form.Control 
+                onChange={this.handleChange}
+                required
+                type="text"
+                name="lastname"
+                placeholder="Last Name"
+              />
+            </Col>
+          </Form.Row>
+        </Form.Group>
+
+        <Form.Group>
+          <Form.Label>Email</Form.Label>
+          <Form.Control 
             onChange={this.handleChange}
-            placeholder="First Name"
             required
-          />
-          <br/>
-          <input
-            type="name"
-            name="lastname"
-            onChange={this.handleChange}
-            placeholder="Last Name"
-            required
-          />
-          <br/>
-          <input
-            type="name"
-            name="address"
-            onChange={this.handleChange}
-            placeholder="Address"
-            required
-          />
-          <br/>
-          <input
-            type="name"
-            name="city"
-            onChange={this.handleChange}
-            placeholder="City"
-            required
-          />
-          <br/>
-          <input
-            type="name"
-            name="state"
-            onChange={this.handleChange}
-            placeholder="State"
-            required
-          />
-          <br/>
-          <input
-            type="name"
-            name="zipcode"
-            onChange={this.handleChange}
-            placeholder="Zip Code"
-            required
-          />
-          <br/>
-          <input
             type="email"
             name="usermail"
-            onChange={this.handleChange}
-            placeholder="Email"
-            required
+            placeholder="name@example.com"
           />
-          <br/>
-          <input
+
+          <Form.Label>Password</Form.Label>
+          <Form.Control 
+            onChange={this.handleChange}
+            required
             type="password"
             name="passcode"
-            onChange={this.handleChange}
             placeholder="Password"
-            required
           />
-          <br/>
+        </Form.Group>
 
-          <input
-            type="submit"
-            value="Create Account"
-            onClick={this.handleSubmit}
-          />
-        </form>
-        <button><Link to="/">Login</Link></button>
-      </div>
+        <Form.Group>
+          <Form.Label>Address</Form.Label>
+            <Form.Control
+              required  
+              type="text"
+              name="street" 
+              placeholder="Enter Address"
+              onChange={this.handleChange}
+            />
+          <Form.Row>
+            <Col>
+              <Form.Label>City</Form.Label>
+              <Form.Control
+                onChange={this.handleChange}
+                required  
+                type="text" 
+                name="city"
+                placeholder="City"
+              />
+            </Col>
+            <Col>
+              <Form.Label>State</Form.Label>
+              <Form.Control
+                onChange={this.handleChange}
+                required 
+                type="text"
+                maxLength="2" 
+                name="state"
+                placeholder="state"
+              />
+            </Col>
 
+            <Col>
+              <Form.Label>Zipcode</Form.Label>
+              <Form.Control
+                onChange={this.handleChange}
+                required 
+                type="number"
+                min="1"
+                max="99999"
+                name="zipcode"
+                placeholder="zipcode"
+              />
+            </Col>
+          </Form.Row>
+        </Form.Group>
+        <Button variant="success" size='lg' type='submit'>Sign up!</Button>
+      </Form>
     )
   }
 }
 
-export default SignUpBox;
+export default withRouter(SignUpBox);

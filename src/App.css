@@ -6,7 +6,9 @@
   height: 40vmin;
 }
 .page{
-  margin: 4em 0em;
+  margin: 2em 0em;
+  padding: 2em;
+  color: #000;
 }
 .App-header {
   background-color: #FF482B;

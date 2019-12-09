@@ -4,7 +4,7 @@ import SignUpBox from '../Forms/SignUpBox';
 class SignUpPage extends Component {
   render() {
     return (
-      <div>
+      <div className="page">
         <SignUpBox/>
       </div>
 
