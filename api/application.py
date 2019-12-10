@@ -2,7 +2,7 @@ from flask import Flask
 from flask_restful import Resource, Api
 from resources.user import UserByEmail, UsersAll, SignUp, SignIn
 from resources.restaurant import Restaurants, CreateRestaurant, GetRestaurant
-from resources.menu_items import GetMenuItems, AddMenuItem
+from resources.menu_items import GetMenuItems, MenuItem
 
 #Testing Azure
 
@@ -24,7 +24,7 @@ api.add_resource(GetRestaurant, '/restaurant/<string:restaurant_id>')
 api.add_resource(CreateRestaurant, '/create_restaurant')
 
 api.add_resource(GetMenuItems, '/<string:restaurant_id>/menu_items')
-api.add_resource(AddMenuItem, '/add_item')
+api.add_resource(MenuItem, '/menu_item')
 
 
 if __name__ == '__main__':
