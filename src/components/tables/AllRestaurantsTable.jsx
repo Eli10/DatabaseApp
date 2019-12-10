@@ -7,16 +7,16 @@ class AllRestaurantsTable extends Component {
   constructor(){
     super();
     this.state = {
-      list: {
-        restaurants: []
-      } 
+      list: []
     }
   }
 
   async componentDidMount(){
     let list = await GetAllRestaurants();
+    console.log(list);
+    console.log(this.state.list);
     this.setState({
-      list: list
+      list: list.restaurants || []
     })
   }
 
@@ -26,15 +26,17 @@ class AllRestaurantsTable extends Component {
     <div className='grey-bkg'>
       <Table striped bordered hover>
         <thead>
-          <th>Restaurant Name</th>
-          <th>Address</th>
-          <th>Rating</th>
-          <th>Menu Link</th>
+          <tr>
+            <th>Restaurant Name</th>
+            <th>Address</th>
+            <th>Rating</th>
+            <th>Menu Link</th>
+          </tr>
         </thead>
 
         <tbody>
-          {this.state.list.restaurants.map((r,index) => (
-            <tr>
+          {this.state.list.map((r,index) => (
+            <tr key={index}>
               <td>{r.name}</td>
               <td>{`${r.street}, ${r.city}, ${r.state}, ${r.zipcode}`}</td>
               <td style={{textAlign: 'center'}}>{r.rating}</td>

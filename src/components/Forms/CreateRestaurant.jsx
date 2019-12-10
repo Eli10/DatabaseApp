@@ -125,7 +125,7 @@ class CreateRestaurant extends Component {
                 required 
                 type="text" 
                 name="state"
-                placeholder="state"
+                placeholder="State"
                 onChange={this.handleChange}
               />
             </Col>

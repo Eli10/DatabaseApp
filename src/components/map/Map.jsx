@@ -22,16 +22,15 @@ class Test extends Component {
   constructor(){
     super();
     this.state = {
-      restaurants: {
-        restaurants: []
-      }
+      restaurants: []
     }
   }
   async componentDidMount(){
     // Does API Request
-    let restaurants = await GetAllRestaurants();
+    let r = await GetAllRestaurants();
+    console.log(r);
     this.setState({
-      restaurants: restaurants || {restaurants: []}
+      restaurants: r.restaurants || []
     });
   }
 
@@ -46,7 +45,7 @@ class Test extends Component {
           attribution={stamenTonerAttr}
           url={stamenTonerTiles}
         />
-        { this.state.restaurants.restaurants.map( (location,index) => (
+        { this.state.restaurants.map( (location,index) => (
             <Marker position = {[location.latitude, location.longitude]} key={index}>
 
             <Popup>

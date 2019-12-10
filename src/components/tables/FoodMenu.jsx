@@ -19,18 +19,20 @@ class FoodMenu extends Component {
   }
   render(){
     return(
-      <Table striped bordered hover size="sm">
+      <Table striped bordered hover size="sm" className='grey-bkg'>
         <thead>
-          <th>#</th>
-          <th>Name</th>
-          <th>Price</th>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th  style={{textAlign:'right'}}>Price</th>
+          </tr>
         </thead>
         <tbody>
         {this.state.menu.map((item,index) => (
-            <tr>
+            <tr key={index}>
               <td>{index+1}</td>
               <td>{item.item_name}</td>
-              <td>{item.price.toFixed(2)}$</td>
+              <td style={{textAlign:'right'}}>{item.price.toFixed(2)}$</td>
             </tr>
           ))}
         </tbody>
