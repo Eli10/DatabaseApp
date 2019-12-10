@@ -23,12 +23,13 @@ Restaurants
 - GET /restaurant/<restaurant_id>
 - POST /create_restaurant
 
-
 Menu Items
 - GET /<restaurant_id>/menu_items
 - POST /menu_item - Create new item for menu
 - PUT /menu_item - Update existing item
 - DELETE /menu_item
+
+- GET /closest_restaurant/<user_id> - returns array of 5 closest pizza restaurants
 
 
 ## To-Do
