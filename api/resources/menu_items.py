@@ -32,13 +32,95 @@ class GetMenuItems(Resource):
         except:
             return {"Msg": "Some error occurred"}, 500
 
+
 class AddMenuItemSchema(Schema):
     item_name = fields.Str()
     description = fields.Str()
     restaurant_id = fields.Integer()
     price = fields.Decimal()
 
-class AddMenuItem(Resource):
+class UpdateMenuItemSchema(Schema):
+    item_id = fields.Integer()
+    item_name = fields.Str()
+    description = fields.Str()
+    price = fields.Decimal()
+
+class DeleteMenuItemSchema(Schema):
+    item_id = fields.Integer()
+
+
+class MenuItem(Resource):
+
+    def delete(self):
+        req_data = request.get_json()
+
+        # Validating post body arguments then insert into table if valid else throw error
+        try:
+            result = DeleteMenuItemSchema().load(req_data)
+            print("Hello")
+            print(result)
+            print(type(result))
+            cn = connection()
+            cur = cn.cursor()
+            delete_item = "DELETE from menu_items WHERE item_id={}".format(result['item_id'])
+            print(delete_item)
+            cur.execute(delete_item)
+            # Commits changes to the database
+            cn.commit()
+
+
+            # Updating into Menu Table
+            delete_menu = "DELETE from menu WHERE item_id={}".format(result['item_id'])
+
+            print(delete_menu)
+            cur.execute(delete_menu)
+            # Commits changes to the database
+            cn.commit()
+
+            cur.close()
+            cn.close()
+            return 200
+        except ValidationError as err:
+            return err.messages, 500
+        except:
+            return {"Msg": "Some error occurred"}, 500
+
+
+    def put(self):
+        req_data = request.get_json()
+
+        # Validating post body arguments then insert into table if valid else throw error
+        try:
+            result = UpdateMenuItemSchema().load(req_data)
+            print("Hello")
+            print(result)
+            print(type(result))
+            cn = connection()
+            cur = cn.cursor()
+            update_item = "UPDATE menu_items SET item_name = '{}', description = '{}' WHERE item_id={}".format(result['item_name'], result['description'], result['item_id'])
+            print("Hello")
+            print(update_item)
+            cur.execute(update_item)
+            # Commits changes to the database
+            cn.commit()
+
+
+            # Updating into Menu Table
+            update_menu_price = "UPDATE menu SET price={} WHERE item_id={}".format(result['price'], result['item_id'])
+
+            print(update_menu_price)
+            cur.execute(update_menu_price)
+            # Commits changes to the database
+            cn.commit()
+
+            cur.close()
+            cn.close()
+            return 200
+        except ValidationError as err:
+            return err.messages, 500
+        except:
+            return {"Msg": "Some error occurred"}, 500
+
     def post(self):
         req_data = request.get_json()
         # Validating post body arguments then insert into table if valid else throw error
