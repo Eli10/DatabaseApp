@@ -27,8 +27,10 @@ class RestaurantInfo extends Component {
         <h3>Information</h3>
         <Table>
           <thead>
-            <th>Sanitary Grade</th>
-            <th>Rating</th>
+            <tr>
+              <th>Sanitary Grade</th>
+              <th>Rating</th>
+            </tr>
           </thead>
           <tbody>
             <tr>

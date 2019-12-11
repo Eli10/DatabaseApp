@@ -30,12 +30,6 @@ class LoginBox extends Component {
 
   handleSubmit = e => {
    e.preventDefault();
-    // Does call to Login Route
-    // And return result
-    // if(this.state.passcode === this.state.passcodeCheck)
-    //   alert(`Email: ${this.state.usermail}\nPass: ${this.state.passcode}`);
-    // else
-    //   alert(`Passcode does not match`)
     let body = JSON.stringify({
       email: this.state.usermail,
       password: this.state.passcode,

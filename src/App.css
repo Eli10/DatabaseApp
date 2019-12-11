@@ -1,15 +1,10 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-}
 .page{
   margin: 2em 0em;
   padding: 2em;
   color: #000;
 }
+
 .App-header {
   background-color: #FF482B;
   min-height: 100vh;
