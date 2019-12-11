@@ -80,3 +80,12 @@ export const AddMenu = (contents) => {
     console.log(err);
   })
 }
+
+export const DeleteRestaurant = (contents) => {
+  return axios
+  .delete('https://cybertron-api.azurewebsites.net/restaurants', {data: contents})
+  .then(res => res.data)
+  .catch(err => {
+    console.log(err);
+  })
+}
