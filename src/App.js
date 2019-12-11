@@ -14,6 +14,14 @@ class App extends React.Component {
 
     }
     this.setUserID = this.setUserID.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+
+  logout = () => {
+    this.setState({
+      loggedIn: false,
+      userID: null,
+    })
   }
 
   setUserID = (userID) => {
@@ -25,19 +33,18 @@ class App extends React.Component {
   }
 
   render(){
-    console.log(this.state.loggedIn)
     return (
       <Router>
-          <NavigationBar/>
+          <NavigationBar loggedIn={this.state.loggedIn} logout={this.logout}/>
         <div className="App-header">
           <Switch>
-            <Route exact path="/"><pages.HomePage/></Route>
-            <Route exact path="/signup" component={pages.SignUpPage}></Route>
+            <Route exact path="/" component={pages.HomePage}/>
+            <Route exact path="/signup" component={pages.SignUpPage}/>
             <Route exact path="/login" component={pages.LoginPage}>
               <pages.LoginPage setUserID={this.setUserID}/>
             </Route>
 
-            <Route exact path="/map" component={pages.MapPage}></Route>
+            <Route exact path="/map" component={pages.MapPage}/>
             <Route exact path="/all-restaurants" component={pages.RestaurantsPage}/>
 
             <Route exact path="/user">
@@ -46,11 +53,11 @@ class App extends React.Component {
                 <Redirect to="/login" />}
             </Route>
 
-            <Route exact path="/restaurant/:id" component={pages.RestaurantPage}></Route>
+            <Route exact path="/restaurant/:id" component={pages.RestaurantPage}/>
 
             {/* To Do Forms */}
-            <Route exact path="/Create-restaurant" component={pages.CreateRestaurantPage}></Route>
-            <Route exact path="/edit/restaurant/:id" component={pages.HomePage}></Route>
+            <Route exact path="/create-restaurant" component={pages.CreateRestaurantPage}/>
+            <Route exact path="/edit/restaurant/:id" component={pages.EditRestaurantPage}/>
           </Switch>
         </div>
       </Router>

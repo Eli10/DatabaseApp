@@ -34,4 +34,3 @@ Menu Items
 
 ## To-Do
 - Dockerize Api
-- Add Database Models once we get schemas

@@ -6,9 +6,10 @@ import RestaurantPage from './pages/RestaurantPage';
 import RestaurantsPage from './pages/RestaurantsPage';
 import CreateRestaurantPage from './pages/CreateRestaurantPage';
 import UserPage from './pages/UserPage';
+import EditRestaurantPage from './pages/EditRestaurantPage';
 
 export {
   HomePage, SignUpPage, LoginPage,
   MapPage, RestaurantPage, CreateRestaurantPage,
-  RestaurantsPage, UserPage
+  RestaurantsPage, UserPage, EditRestaurantPage
 };

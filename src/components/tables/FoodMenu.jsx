@@ -1,38 +1,28 @@
 import React, {Component} from 'react';
-import Table from 'react-bootstrap/Table';
-import {GetRestaurantFood} from '../../actions/apicalls';
+import {Button, Table} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
 
 class FoodMenu extends Component {
-  constructor(){
-    super();
-    this.state = {
-      menu: []
-    }
-  }
 
-  async componentDidMount(){
-    let menu_items = await GetRestaurantFood(this.props.match.params.id);
-    this.setState({
-      menu: menu_items || []
-    });
-  }
+
   render(){
     return(
-      <Table striped bordered hover size="sm">
+      <Table striped bordered hover size="sm" className='grey-bkg'>
         <thead>
           <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Price</th>
+            <th  style={{textAlign:'right'}}>Price</th>
+            <th>Edit</th>
           </tr>
         </thead>
         <tbody>
-        {this.state.menu.map((item,index) => (
-            <tr key={item.item_name}>
+        {this.props.menus.map((item,index) => (
+            <tr key={index}>
               <td>{index+1}</td>
               <td>{item.item_name}</td>
-              <td>{item.price.toFixed(2)}$</td>
+              <td style={{textAlign:'right'}}>{item.price.toFixed(2)}$</td>
+              <td><Button onClick={() => this.props.button_toggle(index)}>Edit</Button></td>
             </tr>
           ))}
         </tbody>
