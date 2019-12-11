@@ -89,7 +89,7 @@ class SignIn(Resource):
         try:
             result = UserSignInSchema().load(req_data)
 
-            get_user_query = "SELECT email, password FROM users where email='{}'".format(result['email'])
+            get_user_query = "SELECT user_id, email, password FROM users where email='{}'".format(result['email'])
             print(get_user_query)
             cn = connection()
             cur = cn.cursor()
@@ -97,12 +97,12 @@ class SignIn(Resource):
 
 
 
-            for (email, password) in cur:
+            for (user_id, email, password) in cur:
                 print(email)
                 if email == result['email'] and password == result['password']:
                     cur.close()
                     cn.close()
-                    return 200
+                    return {'user_id': user_id}, 200
                 else:
                     cur.close()
                     cn.close()
