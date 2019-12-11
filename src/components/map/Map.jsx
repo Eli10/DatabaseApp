@@ -3,7 +3,7 @@ import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import {Link} from 'react-router-dom';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {GetAllRestaurants} from '../../actions/apicalls';
+import {GetAllRestaurants, GetClosestRestaurants} from '../../actions/apicalls';
 
 const stamenTonerTiles = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const stamenTonerAttr = '&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors';
@@ -19,16 +19,20 @@ L.Icon.Default.mergeOptions({
 });
 
 class Test extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       restaurants: []
     }
   }
   async componentDidMount(){
     // Does API Request
-    let r = await GetAllRestaurants();
-
+    let r;
+    if(this.props.userID) {
+      r = await GetClosestRestaurants(this.props.userID);
+    }
+    else
+      r = await GetAllRestaurants();
     this.setState({
       restaurants: r.restaurants || []
     });
