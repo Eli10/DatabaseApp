@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
 import {Button, Col} from 'react-bootstrap';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Link} from 'react-router-dom';
 const axios = require('axios');
 
 
@@ -54,7 +54,7 @@ class SignUpBox extends Component {
     instance.post('/sign-up',body)
     .then( (response) => {
       console.log(response);
-      props.history.push('/sign-in');
+      props.history.push('/login');
     })
     .catch(function (error) {
       console.log(error);
