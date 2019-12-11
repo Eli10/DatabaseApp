@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import Form from 'react-bootstrap/Form';
 import {Button} from 'react-bootstrap';
-import {UpdateMenu, DeleteMenu} from '../../actions/apicalls';
+import {AddMenu} from '../../actions/apicalls';
 
-class EditFood extends Component {
+class AddFood extends Component {
   constructor(props){
     super(props);
     this.state = {
-      price: props.item.price,
-      item_name: props.item.item_name
+      price: '',
+      item_name: ''
 
     }
   }
@@ -17,32 +17,23 @@ class EditFood extends Component {
       [e.target.name]: e.target.value
     });
 
+  
   }
 
   handleSubmit = async e => {
     e.preventDefault();
     let contents = {
-      item_id: this.props.item.item_id,
+      restaurant_id: this.props.restaurant_id,
       item_name: this.state.item_name,
-      description: this.props.item.description,
       price: this.state.price,
+      description: ''
     }
 
-    await UpdateMenu(contents);
+    await AddMenu(contents);
     // Refresh page
     window.location.reload();
 
 
-  }
-
-  handleDelete = async e => {
-    e.preventDefault();
-    let contents = {
-      item_id: this.props.item.item_id
-    }
-
-    await DeleteMenu(contents);
-    window.location.reload();
   }
   render(){
     return (
@@ -53,8 +44,7 @@ class EditFood extends Component {
             required  
             type="text"
             name="item_name" 
-            placeholder="Enter Food Name"
-            defaultValue={this.props.item.item_name}
+            placeholder="Food Name"
             onChange={this.handleChange}
           />
           <Form.Label>Price</Form.Label>
@@ -64,15 +54,11 @@ class EditFood extends Component {
             step="0.01"
             min='0'
             name="price" 
-            defaultValue={this.props.item.price}
             onChange={this.handleChange}
           />
         </Form.Group>
-        <Button variant="danger" onClick={this.handleDelete} size='lg'>
-          Delete
-        </Button>
-        <Button variant="success" type="submit" size='lg'>
-          Update
+        <Button variant="success" type="submit" size='lg' block>
+          Add Item
         </Button>
       </Form>
     )
@@ -80,4 +66,4 @@ class EditFood extends Component {
 
 }
 
-export default EditFood;
+export default AddFood;

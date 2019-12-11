@@ -72,3 +72,11 @@ export const DeleteMenu = (contents) => {
   })
 }
 
+export const AddMenu = (contents) => {
+  return axios
+  .post('https://cybertron-api.azurewebsites.net/menu_item', contents)
+  .then(res => res.data)
+  .catch(err => {
+    console.log(err);
+  })
+}
