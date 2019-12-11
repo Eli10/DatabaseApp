@@ -22,8 +22,8 @@ class App extends React.Component {
             <Route exact path="/restaurant/:id" component={pages.RestaurantPage}/>
 
             {/* To Do Forms */}
-            <Route exact path="/Create-restaurant" component={pages.CreateRestaurantPage}/>
-            <Route exact path="/edit/restaurant/:id" component={pages.HomePage}/>
+            <Route exact path="/create-restaurant" component={pages.CreateRestaurantPage}/>
+            <Route exact path="/edit/restaurant/:id" component={pages.EditRestaurantPage}/>
           </Switch>
         </div>
       </Router>

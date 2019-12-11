@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
 import Form from 'react-bootstrap/Form';
 import {Col, Button} from 'react-bootstrap';
-import {GetCoords, SetRestaurant} from '../../actions/apicalls';
+import {GetCoords, UpdateRestaurant, GetRestaurant} from '../../actions/apicalls';
+import {Link} from 'react-router-dom';
 
-class CreateRestaurant extends Component {
+class EditRestaurant extends Component {
   constructor(){
     super();
     this.state = {
       name: '',
-      sanitary_grade: 'A',
-      cuisine_type: 'Pizzeria',
+      sanitary_grade: "",
+      cuisine_type: '',
       rating: 0,
       street: '',
       city: '',
@@ -19,6 +20,15 @@ class CreateRestaurant extends Component {
       longitude: 0
     }
   }
+
+  async componentDidMount(){
+    let result = await GetRestaurant(this.props.id);
+
+    this.setState(
+      result
+    )
+  }
+
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -26,19 +36,21 @@ class CreateRestaurant extends Component {
 
   
   }
+  
 
   handleSubmit = async e => {
 
     e.preventDefault();
-    let coordinates = await GetCoords(this.state.street,this.state.city,this.state.zipcode);
-    // Get Location using api
+    let coordinates = await GetCoords(this.state.street,this.state.city,this.state.zipcode) || {lat: 0, lng: 0};
+
 
     // Send to API
     let toSend = {
+      restaurant_id: this.state.restaurant_id,
       name: this.state.name,
       cuisine_type: this.state.cuisine_type,
       sanitary_grade: this.state.sanitary_grade,
-      rating: 0,
+      rating: this.state.rating,
       street_adr: this.state.street,
       cityaddr: this.state.city,
       state: this.state.state,
@@ -47,13 +59,12 @@ class CreateRestaurant extends Component {
       longitude: coordinates.lng
     }
 
-    await SetRestaurant(toSend);
-    window.location.href = '/map';
-
-
-    
+    await UpdateRestaurant(toSend);
+    window.location.href = `/restaurant/${this.props.id}`;
   }
+  
   render(){
+
     return (
       <Form onSubmit={this.handleSubmit} className='form-two'>
         <Form.Group>
@@ -63,6 +74,7 @@ class CreateRestaurant extends Component {
             type="text"
             name="name" 
             placeholder="Enter Restaurant Name"
+            defaultValue={this.state.name || ''}
             onChange={this.handleChange}
           />
         </Form.Group>
@@ -74,10 +86,11 @@ class CreateRestaurant extends Component {
             <Form.Control 
               as="select"
               name="sanitary_grade"
+              defaultValue={this.state.sanitary_grade}
               onChange={this.handleChange}>
-                <option>A</option>
-                <option>B</option>
-                <option>C</option>
+                <option value='A'>A</option>
+                <option value='B'>B</option>
+                <option value='C'>C</option>
             </Form.Control>
           </Col>
 
@@ -86,11 +99,12 @@ class CreateRestaurant extends Component {
             <Form.Control 
               as="select"
               name="cuisine_type"
+              defaultValue={this.state.cuisine_type || 'Other'}
               onChange={this.handleChange}>
-                <option>Pizzeria</option>
-                <option>Italian</option>
-                <option>Bar</option>
-                <option>Other</option>
+                <option value='Pizzera'>Pizzeria</option>
+                <option value='Italian'>Italian</option>
+                <option value='Bar'>Bar</option>
+                <option calue='Other'>Other</option>
             </Form.Control>
           </Col>
           </Form.Row>
@@ -103,6 +117,7 @@ class CreateRestaurant extends Component {
             type="text"
             name="street" 
             placeholder="Enter Address"
+            defaultValue={this.state.street}
             onChange={this.handleChange}
           />
         </Form.Group>
@@ -116,6 +131,7 @@ class CreateRestaurant extends Component {
                 type="text" 
                 name="city"
                 placeholder="City"
+                defaultValue={this.state.city}
                 onChange={this.handleChange}
               />
             </Col>
@@ -126,6 +142,7 @@ class CreateRestaurant extends Component {
                 type="text" 
                 name="state"
                 placeholder="State"
+                defaultValue={this.state.state}
                 onChange={this.handleChange}
               />
             </Col>
@@ -137,13 +154,16 @@ class CreateRestaurant extends Component {
                 type="text" 
                 name="zipcode"
                 placeholder="zipcode"
+                defaultValue={this.state.zipcode}
                 onChange={this.handleChange}
               />
             </Col>
           </Form.Row>
         </Form.Group>
+        <Link to={`/restaurant/${this.props.id}`}><Button variant="danger" size='lg' block>Cancel</Button></Link>
+        <br/>
         <Button variant="success" type="submit" size='lg' block>
-          Submit
+          Save Changes
         </Button>
       </Form>
     )
@@ -151,4 +171,4 @@ class CreateRestaurant extends Component {
 
 }
 
-export default CreateRestaurant;
+export default EditRestaurant;

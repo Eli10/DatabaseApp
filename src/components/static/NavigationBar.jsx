@@ -11,10 +11,11 @@ class NavigationBar extends Component {
         <Nav className='mr-auto'>
           <Nav.Link href="/map">View Map</Nav.Link>
           <Nav.Link href="/all-restaurants">All Restaurants</Nav.Link>
+          <Nav.Link href="/create-restaurant">Add Restaurant</Nav.Link>
         </Nav>
 
         <Nav>
-          <Nav.Link href="/login">login</Nav.Link>
+          <Nav.Link href="/login">Login</Nav.Link>
           <Nav.Link href="/signup">Create Account</Nav.Link>
 
         </Nav>
