@@ -4,7 +4,7 @@ import EditFood from '../Forms/EditFood';
 import AddFood from '../Forms/AddFood';
 import RestaurantInfo from '../tables/RestaurantInfo';
 import {GetRestaurantFood, DeleteRestaurant} from '../../actions/apicalls';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Link} from 'react-router-dom';
 import {Container, Row, Col, Modal, Button} from 'react-bootstrap';
 
 class RestaurantPage extends Component {
@@ -19,7 +19,7 @@ class RestaurantPage extends Component {
     }
   }
   handleShow = (item_id) => {
-    console.log(item_id);
+
     this.setState({
       show: true,
       item_to_pass: item_id
@@ -83,12 +83,13 @@ class RestaurantPage extends Component {
         <Row>
           <Col>
           <RestaurantInfo/>
+          <Link to={`/edit/restaurant/${this.props.match.params.id}`}><Button block>Edit Restaurant</Button></Link>
           <Button block variant="warning" onClick={this.handleDelete}>Delete Restaurant</Button>
           </Col>
           <Col>
           <h2>Pizza Menu</h2>
           <FoodMenu menus={this.state.menu} button_toggle={this.handleShow}/>
-          <Button onClick={this.handleAdd} variant='success'>Add Item</Button>
+          <Button onClick={this.handleAdd} block variant='success'>Add Item</Button>
         </Col>
 
         </Row>

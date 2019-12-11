@@ -1,15 +1,18 @@
 import React, {Component} from 'react';
-import CreateRestaurant from '../Forms/CreateRestaurant';
+import EditRestaurant from '../Forms/EditRestaurant';
+import {withRouter} from 'react-router-dom';
 
 class EditRestaurantPage extends Component{
-  
+
+
   render(){
+
     return(
       <div className="page">
-        <CreateRestaurant/>
+        <EditRestaurant id={this.props.match.params.id}/>
       </div>
     )
   }
 }
 
-export default EditRestaurantPage;
+export default withRouter(EditRestaurantPage);

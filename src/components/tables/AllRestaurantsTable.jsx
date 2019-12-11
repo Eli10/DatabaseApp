@@ -13,8 +13,7 @@ class AllRestaurantsTable extends Component {
 
   async componentDidMount(){
     let list = await GetAllRestaurants();
-    console.log(list);
-    console.log(this.state.list);
+
     this.setState({
       list: list.restaurants || []
     })

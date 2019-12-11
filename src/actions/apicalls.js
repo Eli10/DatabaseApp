@@ -89,3 +89,11 @@ export const DeleteRestaurant = (contents) => {
     console.log(err);
   })
 }
+export const UpdateRestaurant = (contents) => {
+  return axios
+  .put('https://cybertron-api.azurewebsites.net/restaurants', contents)
+  .then(res => res.data)
+  .catch(err => {
+    console.log(err);
+  })
+}

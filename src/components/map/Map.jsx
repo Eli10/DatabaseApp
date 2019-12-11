@@ -28,7 +28,7 @@ class Test extends Component {
   async componentDidMount(){
     // Does API Request
     let r = await GetAllRestaurants();
-    console.log(r);
+
     this.setState({
       restaurants: r.restaurants || []
     });
