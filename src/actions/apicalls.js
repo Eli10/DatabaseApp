@@ -53,3 +53,22 @@ export const SetRestaurant = (contents) => {
 
 }
 
+
+export const UpdateMenu = (contents) => {
+  return axios
+  .put('https://cybertron-api.azurewebsites.net/menu_item', contents)
+  .then(res => res.data)
+  .catch(err => {
+    console.log(err);
+  })
+}
+
+export const DeleteMenu = (contents) => {
+  return axios
+  .delete('https://cybertron-api.azurewebsites.net/menu_item', {data: contents})
+  .then(res => res.data)
+  .catch(err => {
+    console.log(err);
+  })
+}
+
