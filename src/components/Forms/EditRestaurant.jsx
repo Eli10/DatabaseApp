@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Form from 'react-bootstrap/Form';
 import {Col, Button} from 'react-bootstrap';
 import {GetCoords, UpdateRestaurant, GetRestaurant} from '../../actions/apicalls';
+import {Link} from 'react-router-dom';
 
 class EditRestaurant extends Component {
   constructor(){
@@ -159,8 +160,10 @@ class EditRestaurant extends Component {
             </Col>
           </Form.Row>
         </Form.Group>
+        <Link to={`/restaurant/${this.props.id}`}><Button variant="danger" size='lg' block>Cancel</Button></Link>
+        <br/>
         <Button variant="success" type="submit" size='lg' block>
-          Submit
+          Save Changes
         </Button>
       </Form>
     )
