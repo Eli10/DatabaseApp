@@ -21,13 +21,15 @@ class FoodMenu extends Component {
     return(
       <Table striped bordered hover size="sm">
         <thead>
-          <th>#</th>
-          <th>Name</th>
-          <th>Price</th>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Price</th>
+          </tr>
         </thead>
         <tbody>
         {this.state.menu.map((item,index) => (
-            <tr>
+            <tr key={item.item_name}>
               <td>{index+1}</td>
               <td>{item.item_name}</td>
               <td>{item.price.toFixed(2)}$</td>

@@ -12,6 +12,16 @@ export const GetAllRestaurants = () => {
   });
 }
 
+export const GetClosestRestaurants = (userID) => {
+  return axios
+  .get(`https://cybertron-api.azurewebsites.net/closest_restaurant/${userID}`)
+  .then(res => res.data)
+  .catch(err => {
+    console.log(err);
+    return [];
+  });
+}
+
 export const GetRestaurant = (id) => {
   return axios
   .get(`https://cybertron-api.azurewebsites.net/restaurant/${id}`)

@@ -45,8 +45,13 @@ class LoginBox extends Component {
     
     instance.post('/sign-in',body)
     .then(function (response) {
-      console.log(response);
-      props.history.push('/map');
+      props.setUserID(response.data.user_id);
+      props.history.push({
+        pathname:'/user',
+        state: {
+          userID: response.data.user_id,
+        }
+      });
     })
     .catch(function (error) {
       console.log(error);
